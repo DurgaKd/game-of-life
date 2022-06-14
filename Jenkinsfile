@@ -1,5 +1,5 @@
 pipeline {
-    agent {label : JDK11}
+    agent {label 'JDK11'}
     stages {
         stage ('scm') {
             steps {
@@ -11,9 +11,5 @@ pipeline {
                 sh 'mvn package'
             }
         }
-    }
-    postbuild{
-        junit '**/TEST-*.xml'
-        archive '**/*.war'
     }
 }
