@@ -12,4 +12,10 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            junit '**/TEST-*.xml'
+            archive '**/*.war'
+        }
+    }
 }
