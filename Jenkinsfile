@@ -1,21 +1,12 @@
-pipeline {
-    agent {label 'JDK11'}
-    stages {
-        stage ('scm') {
-            steps {
-                git branch: 'master' , url: 'https://github.com/DurgaKd/game-of-life.git'
-            }
-        }
-        stage ('build') {
-            steps {
-                sh 'mvn package'
-            }
-        }
+node('JDK11') {
+    stage('scm'){
+        git branch: 'master' , url: 'https://github.com/wakaleo/game-of-life.git'
     }
-    post {
-        success {
-            junit '**/TEST-*.xml'
-            archive '**/*.war'
-        }
+    stage('build'){
+        sh 'mvn package'
+    }
+    stage('postbuild'){
+        junit '**/TEST-*.xml'
+        archive '**/*.war'
     }
 }
